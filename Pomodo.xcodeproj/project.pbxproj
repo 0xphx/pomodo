@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1470DE7ADCC4D663C670BE42 /* MenuBarLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A10E9F89CAE46B11475CA /* MenuBarLabelView.swift */; };
 		17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CAB7C10C880B267F673BA /* TimerPhase.swift */; };
 		19410674D77591C3F80D9618 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110D48950DEF388EEE73F32 /* SmokeTests.swift */; };
 		4607E4187C9F5CC1A06DECDA /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */; };
@@ -15,6 +16,7 @@
 		62EBE5B80E179F6B99F1FA9B /* SoundPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */; };
 		67BEA61B1A2448A4348633F8 /* TimerSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */; };
 		691AAF29BD1CCDCCA2E90958 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E97049606B0701E68C37E /* LaunchAtLogin.swift */; };
+		7F2E7AA8DD7669E1AAF43672 /* TickBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761F1914F3745888C851C82 /* TickBarView.swift */; };
 		ACC579527ACE857FC6A63FBC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C925EFA20C7A987B390A /* NotificationManager.swift */; };
 		C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */; };
 		E2F3A8EF8EE96AD32AF1333E /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E437821E213AEF2FE5CC23A8 /* NotificationManagerTests.swift */; };
@@ -39,6 +41,7 @@
 		544CAB7C10C880B267F673BA /* TimerPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhase.swift; sourceTree = "<group>"; };
 		6E66E8F541F50805D0184F7A /* TimerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettings.swift; sourceTree = "<group>"; };
 		7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		810A10E9F89CAE46B11475CA /* MenuBarLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabelView.swift; sourceTree = "<group>"; };
 		81CB3E230F7DD650F3ED13CF /* Pomodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86D8C925EFA20C7A987B390A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayerTests.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoApp.swift; sourceTree = "<group>"; };
 		D94E97049606B0701E68C37E /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
 		E437821E213AEF2FE5CC23A8 /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
+		F761F1914F3745888C851C82 /* TickBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -61,6 +65,15 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
+		3F7F36C9118CFF7518B9B289 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				810A10E9F89CAE46B11475CA /* MenuBarLabelView.swift */,
+				F761F1914F3745888C851C82 /* TickBarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8A22B591A1FE7F2AB3367F29 /* Pomodo */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +82,7 @@
 				9DC66269DCDC84D9FE71D8DB /* Models */,
 				FF073A43C66C980DE4C637D4 /* Resources */,
 				2E39977B7BF0422E4C43F896 /* Support */,
+				3F7F36C9118CFF7518B9B289 /* Views */,
 			);
 			path = Pomodo;
 			sourceTree = "<group>";
@@ -208,9 +222,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				691AAF29BD1CCDCCA2E90958 /* LaunchAtLogin.swift in Sources */,
+				1470DE7ADCC4D663C670BE42 /* MenuBarLabelView.swift in Sources */,
 				ACC579527ACE857FC6A63FBC /* NotificationManager.swift in Sources */,
 				C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */,
 				4607E4187C9F5CC1A06DECDA /* SoundPlayer.swift in Sources */,
+				7F2E7AA8DD7669E1AAF43672 /* TickBarView.swift in Sources */,
 				524BDDA1B4733849A7BE3202 /* TimerEngine.swift in Sources */,
 				17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */,
 				EE67BA6D2A13E8E1ACAF9F7A /* TimerSettings.swift in Sources */,
