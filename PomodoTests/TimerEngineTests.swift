@@ -149,4 +149,78 @@ final class TimerEngineTests: XCTestCase {
         clock.advance(268); engine.tick()
         XCTAssertEqual(engine.formattedRemaining, "00:32")
     }
+
+    func testIdlePreviewDefaultsToSettingsWorkMinutes() {
+        let engine = TimerEngine(settings: makeSettings(work: 25))
+        XCTAssertEqual(engine.idlePreviewMinutes, 25)
+        XCTAssertEqual(engine.idlePreviewSeconds, 25 * 60)
+        XCTAssertEqual(engine.formattedDisplay, "25:00")
+    }
+
+    func testSetPendingCustomWorkMinutesOverridesIdlePreview() {
+        let engine = TimerEngine(settings: makeSettings(work: 25))
+        engine.setPendingCustomWorkMinutes(12)
+        XCTAssertEqual(engine.idlePreviewMinutes, 12)
+        XCTAssertEqual(engine.formattedDisplay, "12:00")
+    }
+
+    func testSetPendingCustomWorkMinutesClampsToAtLeastOne() {
+        let engine = TimerEngine(settings: makeSettings(work: 25))
+        engine.setPendingCustomWorkMinutes(0)
+        XCTAssertEqual(engine.idlePreviewMinutes, 1)
+    }
+
+    func testSetPendingCustomWorkMinutesIgnoredWhileRunning() {
+        let engine = TimerEngine(settings: makeSettings(work: 25))
+        engine.start()
+        engine.setPendingCustomWorkMinutes(12)
+        XCTAssertNil(engine.pendingCustomWorkMinutes)
+    }
+
+    func testStartConsumesPendingCustomWorkMinutesOnce() {
+        let engine = TimerEngine(settings: makeSettings(work: 25, short: 5))
+        engine.setPendingCustomWorkMinutes(12)
+        engine.start()
+        XCTAssertEqual(engine.totalSeconds, 12 * 60)
+        XCTAssertNil(engine.pendingCustomWorkMinutes)
+    }
+
+    func testPendingCustomWorkMinutesDoesNotReapplyToSubsequentWorkPhase() {
+        let clock = TestClock()
+        let engine = TimerEngine(settings: makeSettings(work: 25, short: 1), now: clock.now)
+        engine.setPendingCustomWorkMinutes(1)
+        engine.start()
+        XCTAssertEqual(engine.totalSeconds, 60)
+        clock.advance(61); engine.tick() // work (1 min custom) done -> shortBreak
+        clock.advance(61); engine.tick() // shortBreak done -> work again, sollte wieder Settings-Standard (25) nutzen
+        XCTAssertEqual(engine.phase, .work)
+        XCTAssertEqual(engine.totalSeconds, 25 * 60)
+    }
+
+    func testCancelClearsPendingCustomWorkMinutes() {
+        let engine = TimerEngine(settings: makeSettings(work: 25))
+        engine.setPendingCustomWorkMinutes(9)
+        engine.cancel()
+        XCTAssertNil(engine.pendingCustomWorkMinutes)
+    }
+
+    func testIdleFractionReflectsMinutesOutOf60() {
+        let engine = TimerEngine(settings: makeSettings(work: 25))
+        engine.setPendingCustomWorkMinutes(30)
+        XCTAssertEqual(engine.idleFraction, 0.5, accuracy: 0.0001)
+    }
+
+    func testIdleFractionClampsAtOneForValuesAtOrAbove60() {
+        let engine = TimerEngine(settings: makeSettings(work: 25))
+        engine.setPendingCustomWorkMinutes(90)
+        XCTAssertEqual(engine.idleFraction, 1.0, accuracy: 0.0001)
+    }
+
+    func testFormattedDisplayShowsLiveRemainingWhileRunning() {
+        let clock = TestClock()
+        let engine = TimerEngine(settings: makeSettings(work: 25), now: clock.now)
+        engine.start()
+        clock.advance(10); engine.tick()
+        XCTAssertEqual(engine.formattedDisplay, engine.formattedRemaining)
+    }
 }
