@@ -67,6 +67,12 @@ struct MenuBarView: View {
                     .multilineTextAlignment(.trailing)
                     .focused($isDurationFieldFocused)
                     .onSubmit(commitCustomDuration)
+                    .onExitCommand { isEditingCustomDuration = false }
+                    .onChange(of: isDurationFieldFocused) { _, isFocused in
+                        if !isFocused && isEditingCustomDuration {
+                            commitCustomDuration()
+                        }
+                    }
             } else {
                 Text(engine.formattedDisplay)
                     .font(.system(size: 40, weight: .semibold, design: .rounded))
