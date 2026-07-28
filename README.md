@@ -8,7 +8,7 @@ Native macOS-Menüleisten-App für die Pomodoro-Technik. Kein Dock-Icon, läuft 
 2. Projekt generieren: `xcodegen generate`
 3. `Pomodo.xcodeproj` in Xcode öffnen, Scheme "Pomodo", Cmd+R
 
-Voraussetzung: macOS 14 (Sonoma) oder neuer, Xcode 15 oder neuer.
+Voraussetzung: macOS 14 (Sonoma) oder neuer, Xcode 16 oder neuer.
 
 ## Nutzung
 
