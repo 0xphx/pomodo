@@ -11,7 +11,7 @@ struct MenuBarView: View {
         VStack(alignment: .leading, spacing: 16) {
             TickBarView(
                 fraction: engine.isRunning ? engine.elapsedFraction : engine.idleFraction,
-                isInteractive: !engine.isRunning,
+                isInteractive: !engine.isRunning && !isEditingCustomDuration,
                 onDrag: { fraction in
                     let minutes = min(max(Int((fraction * 60).rounded()), 1), 60)
                     engine.setPendingCustomWorkMinutes(minutes)
@@ -28,6 +28,11 @@ struct MenuBarView: View {
         .frame(width: 320)
         .background(.ultraThinMaterial)
         .foregroundStyle(Color.primary)
+        .onChange(of: engine.isRunning) { _, isRunning in
+            if isRunning {
+                isEditingCustomDuration = false
+            }
+        }
     }
 
     private var cycleIndicator: some View {
