@@ -13,3 +13,4 @@
 
 ## Erledigt
 - [x] Pomodoro-Menüleisten-App (Grundgerüst, TimerEngine, UI, Settings, Sound/Notifications) (2026-07-28)
+- [x] Menüleisten-Vereinfachung (kein Icon mehr) & interaktive Tick-Leiste mit einmaliger Custom-Dauer (2026-07-28)
