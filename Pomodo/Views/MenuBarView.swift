@@ -83,7 +83,7 @@ struct MenuBarView: View {
     }
 
     private var showsCustomDurationEditor: Bool {
-        !engine.isRunning && engine.idlePreviewMinutes >= 60
+        !engine.isRunning && (engine.pendingCustomWorkMinutes ?? 0) >= 60
     }
 
     private func commitCustomDuration() {
