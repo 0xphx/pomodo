@@ -10,10 +10,12 @@
 		1470DE7ADCC4D663C670BE42 /* MenuBarLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A10E9F89CAE46B11475CA /* MenuBarLabelView.swift */; };
 		17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CAB7C10C880B267F673BA /* TimerPhase.swift */; };
 		19410674D77591C3F80D9618 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110D48950DEF388EEE73F32 /* SmokeTests.swift */; };
+		3798EAE71D9EE5ABD792BB70 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000DA75976F6B2A8E5DCC4BC /* MenuBarView.swift */; };
 		4607E4187C9F5CC1A06DECDA /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */; };
 		524BDDA1B4733849A7BE3202 /* TimerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC562A67E770C607BFD0E051 /* TimerEngine.swift */; };
 		61A34B9191FEC899F65AA8CD /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307B54C15ECD72D5E2B3CEE /* TimerEngineTests.swift */; };
 		62EBE5B80E179F6B99F1FA9B /* SoundPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */; };
+		63FE45DD438139CB8C6CBFF4 /* ControlsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B19AE72BAFCAC83B1AB6ADC /* ControlsRow.swift */; };
 		67BEA61B1A2448A4348633F8 /* TimerSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */; };
 		691AAF29BD1CCDCCA2E90958 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E97049606B0701E68C37E /* LaunchAtLogin.swift */; };
 		7F2E7AA8DD7669E1AAF43672 /* TickBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761F1914F3745888C851C82 /* TickBarView.swift */; };
@@ -34,9 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		000DA75976F6B2A8E5DCC4BC /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		0110D48950DEF388EEE73F32 /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
 		0133FB525CEE161C8EF5FA0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1307B54C15ECD72D5E2B3CEE /* TimerEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineTests.swift; sourceTree = "<group>"; };
+		3B19AE72BAFCAC83B1AB6ADC /* ControlsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsRow.swift; sourceTree = "<group>"; };
 		47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsTests.swift; sourceTree = "<group>"; };
 		544CAB7C10C880B267F673BA /* TimerPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhase.swift; sourceTree = "<group>"; };
 		6E66E8F541F50805D0184F7A /* TimerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettings.swift; sourceTree = "<group>"; };
@@ -68,7 +72,9 @@
 		3F7F36C9118CFF7518B9B289 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3B19AE72BAFCAC83B1AB6ADC /* ControlsRow.swift */,
 				810A10E9F89CAE46B11475CA /* MenuBarLabelView.swift */,
+				000DA75976F6B2A8E5DCC4BC /* MenuBarView.swift */,
 				F761F1914F3745888C851C82 /* TickBarView.swift */,
 			);
 			path = Views;
@@ -221,8 +227,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63FE45DD438139CB8C6CBFF4 /* ControlsRow.swift in Sources */,
 				691AAF29BD1CCDCCA2E90958 /* LaunchAtLogin.swift in Sources */,
 				1470DE7ADCC4D663C670BE42 /* MenuBarLabelView.swift in Sources */,
+				3798EAE71D9EE5ABD792BB70 /* MenuBarView.swift in Sources */,
 				ACC579527ACE857FC6A63FBC /* NotificationManager.swift in Sources */,
 				C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */,
 				4607E4187C9F5CC1A06DECDA /* SoundPlayer.swift in Sources */,
