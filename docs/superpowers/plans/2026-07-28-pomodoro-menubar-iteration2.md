@@ -14,6 +14,7 @@
 - Keine neuen Swift-Package-Abhängigkeiten.
 - Build-/Test-Kommandos brauchen weiterhin den Prefix `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer`.
 - **Wichtig (wiederkehrender Bug in Iteration 1):** Dieses Projekt nutzt XcodeGen (`project.yml` → `xcodegen generate` → `Pomodo.xcodeproj/project.pbxproj`, klassische, nicht dateisystem-synchronisierte Registrierung). Alle Tasks in diesem Plan **modifizieren nur bestehende Dateien** (keine neuen Swift-Dateien) — daher ist normalerweise **keine** `project.pbxproj`-Änderung nötig. Trotzdem nach jeder Task `git status --short` prüfen; falls doch eine pbxproj-Änderung auftaucht, das genau begründen, bevor committed wird.
+- **Jeder Task-Commit muss den Gesamt-Build grün halten** — deshalb sind API-ändernde Dateien (`TickBarView`) und ihr einziger Call-Site (`MenuBarView`) in einem gemeinsamen Task (Task 2), nicht getrennt.
 - Commit-Messages im Conventional-Commits-Stil.
 - Arbeiten auf einem Feature-Branch (LEICHT-Workflow, mehrdatei-Änderung), z. B. `feature/menubar-iteration2`.
 - Bezugs-Spec: `docs/superpowers/specs/2026-07-28-pomodoro-menubar-app-design.md`, Abschnitt 13 (Iteration 2) — dort stehen alle Verhaltensdetails, die hier referenziert werden.
@@ -23,12 +24,12 @@
 ### Task 1: TimerEngine — Custom-Dauer-Vorschau & einmalige Override-Logik
 
 **Files:**
-- Modify: `Pomodo/TimerEngine.swift` (komplett ersetzen, siehe Step 2)
+- Modify: `Pomodo/TimerEngine.swift` (komplett ersetzen, siehe Step 3)
 - Modify: `PomodoTests/TimerEngineTests.swift` (neue Testmethoden ergänzen, siehe Step 1)
 
 **Interfaces:**
 - Consumes: nichts Neues (nutzt weiterhin `TimerSettings`, `TimerPhase` aus Tasks der ersten Iteration)
-- Produces (neu, von späteren Tasks in diesem Plan genutzt):
+- Produces (neu, von Task 2 in diesem Plan genutzt):
   - `@Published private(set) var pendingCustomWorkMinutes: Int?`
   - `var idlePreviewMinutes: Int { get }`
   - `var idlePreviewSeconds: Int { get }`
@@ -317,16 +318,19 @@ git commit -m "feat: add one-time custom work-duration override to TimerEngine"
 
 ---
 
-### Task 2: TickBarView — Interaktiver Drag-Modus
+### Task 2: TickBarView (interaktiver Drag-Modus) + MenuBarView-Verdrahtung
+
+Zusammengelegt aus einer früheren Plan-Fassung, weil `TickBarView`s Signaturänderung und ihr einziger Call-Site (`MenuBarView`) sich gegenseitig bedingen — getrennt committed würde ein Zwischenstand entstehen, der nicht baut.
 
 **Files:**
-- Modify: `Pomodo/Views/TickBarView.swift` (komplett ersetzen)
+- Modify: `Pomodo/Views/TickBarView.swift` (komplett ersetzen, siehe Step 1)
+- Modify: `Pomodo/Views/MenuBarView.swift` (komplett ersetzen, siehe Step 2)
 
 **Interfaces:**
-- Consumes: nichts (reine Presentational View, unverändert unabhängig von `TimerEngine`)
-- Produces (neue/geänderte Signatur, von Task 5 genutzt):
-  - `TickBarView(fraction: Double, isInteractive: Bool = false, onDrag: ((Double) -> Void)? = nil)`
-  - (bisheriger Parametername `elapsedFraction` entfällt — einziger Call-Site ist `MenuBarView.swift`, wird in Task 5 aktualisiert)
+- Consumes: `TimerEngine` (aus Task 1: `idleFraction`, `idlePreviewMinutes`, `formattedDisplay`, `setPendingCustomWorkMinutes(_:)`, plus bestehende `elapsedFraction`, `isRunning`, `cyclesBeforeLongBreak`, `completedWorkCycles`)
+- Produces:
+  - `TickBarView(fraction: Double, isInteractive: Bool = false, onDrag: ((Double) -> Void)? = nil)` (ersetzt die bisherige Signatur `TickBarView(elapsedFraction:)`)
+  - `MenuBarView(engine:)` — äußere Signatur unverändert, Inhalt neu
 - Kein automatisierter Test (reine SwiftUI-Darstellung inkl. Geste, manuell verifiziert — wie schon in Iteration 1).
 
 - [ ] **Step 1: `Pomodo/Views/TickBarView.swift` komplett ersetzen**
@@ -381,135 +385,7 @@ Wichtige Details:
 - `.gesture(_:isEnabled:)` (verfügbar ab macOS 14) aktiviert/deaktiviert die Drag-Geste komplett, statt mit einem optionalen Gesture-Wert zu hantieren.
 - `DragGesture(minimumDistance: 0)` erkennt auch einen reinen Klick (ohne Bewegung) als Sprung an die geklickte Position.
 
-- [ ] **Step 2: Build verifizieren**
-
-Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild build -project Pomodo.xcodeproj -scheme Pomodo -destination 'platform=macOS'`
-Expected: Wird zunächst FEHLSCHLAGEN, weil `MenuBarView.swift` noch den alten Parameternamen `elapsedFraction:` benutzt — das ist normal und wird in Task 5 behoben. **Nur für diesen Task**: verifiziere stattdessen, dass die Datei syntaktisch korrekt ist, indem du sie isoliert betrachtest (kein separater Build-Schritt hier nötig, da Task 5 den vollständigen Build-Beweis liefert). Committe trotzdem wie in Step 3 beschrieben — Zwischenzustände mit noch nicht angepassten Call-Sites sind in diesem Plan bewusst so vorgesehen (Task 3 und 4 sind ebenfalls unabhängige Dateien ohne Build-Abhängigkeit zueinander, aber Task 5 braucht alle vorherigen Tasks).
-
-- [ ] **Step 3: Commit**
-
-```bash
-git add Pomodo/Views/TickBarView.swift
-git commit -m "feat: add interactive drag mode to TickBarView"
-```
-
----
-
-### Task 3: MenuBarLabelView — Icon entfernen, reine Text-Anzeige
-
-**Files:**
-- Modify: `Pomodo/Views/MenuBarLabelView.swift` (komplett ersetzen)
-
-**Interfaces:**
-- Consumes: `TimerEngine` (`isRunning`, `formattedRemaining`, `remainingSeconds`) — unverändert
-- Produces: `MenuBarLabelView(engine:)` — Signatur unverändert, nur der Inhalt ändert sich
-- Kein automatisierter Test (reine SwiftUI-Darstellung, manuell verifiziert).
-
-- [ ] **Step 1: `Pomodo/Views/MenuBarLabelView.swift` komplett ersetzen**
-
-```swift
-// Pomodo/Views/MenuBarLabelView.swift
-import SwiftUI
-
-struct MenuBarLabelView: View {
-    @ObservedObject var engine: TimerEngine
-
-    var body: some View {
-        if engine.isRunning {
-            Text(engine.formattedRemaining)
-                .font(.system(.body, design: .monospaced))
-                .contentTransition(.numericText(countsDown: true))
-                .animation(.default, value: engine.remainingSeconds)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 2)
-                .background(Capsule().fill(Color.black))
-                .foregroundStyle(Color.white)
-        } else {
-            Text("00:00")
-                .font(.system(.body, design: .monospaced))
-                .foregroundStyle(.secondary)
-        }
-    }
-}
-```
-
-Kein SF-Symbol-Icon mehr in beiden Zuständen (siehe Design-Spec Abschnitt 13.1). Idle zeigt immer literal `"00:00"`, unabhängig von einer evtl. im Panel gewählten Vorschau-Dauer.
-
-- [ ] **Step 2: Build verifizieren**
-
-Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild build -project Pomodo.xcodeproj -scheme Pomodo -destination 'platform=macOS'`
-Expected: `** BUILD SUCCEEDED **` (diese Datei hat keine Abhängigkeit auf die noch nicht angepasste `TickBarView`-Call-Site).
-
-- [ ] **Step 3: Commit**
-
-```bash
-git add Pomodo/Views/MenuBarLabelView.swift
-git commit -m "feat: remove icon from menu bar label, show plain countdown text"
-```
-
----
-
-### Task 4: ControlsRow — "..."-Menü durch reinen Chevron ersetzen
-
-**Files:**
-- Modify: `Pomodo/Views/ControlsRow.swift` (gezielte Änderung, siehe Step 1)
-
-**Interfaces:**
-- Consumes: `TimerEngine` — unverändert
-- Produces: `ControlsRow(engine:)` — Signatur unverändert
-- Kein automatisierter Test (reine SwiftUI-Darstellung, manuell verifiziert).
-
-- [ ] **Step 1: Menu-Label und Indicator anpassen**
-
-In `Pomodo/Views/ControlsRow.swift`, ersetze:
-
-```swift
-            } label: {
-                Text("...")
-            }
-            .menuStyle(.borderlessButton)
-            .fixedSize()
-```
-
-durch:
-
-```swift
-            } label: {
-                Image(systemName: "chevron.down")
-            }
-            .menuStyle(.borderlessButton)
-            .menuIndicator(.hidden)
-            .fixedSize()
-```
-
-Der Rest der Datei (Menü-Inhalt: Einstellungen/Skip/Beenden, die beiden anderen Buttons, `primaryButtonLabel`/`primaryButtonAction`) bleibt unverändert.
-
-- [ ] **Step 2: Build verifizieren**
-
-Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild build -project Pomodo.xcodeproj -scheme Pomodo -destination 'platform=macOS'`
-Expected: `** BUILD SUCCEEDED **`
-
-- [ ] **Step 3: Commit**
-
-```bash
-git add Pomodo/Views/ControlsRow.swift
-git commit -m "fix: replace ellipsis-plus-chevron menu trigger with a single chevron"
-```
-
----
-
-### Task 5: MenuBarView — Panel verdrahten (interaktive Tick-Leiste, Live-Vorschau, manuelle Eingabe)
-
-**Files:**
-- Modify: `Pomodo/Views/MenuBarView.swift` (komplett ersetzen)
-
-**Interfaces:**
-- Consumes: `TimerEngine` (Task 1: `idleFraction`, `idlePreviewMinutes`, `formattedDisplay`, `setPendingCustomWorkMinutes(_:)`, plus bestehende `elapsedFraction`, `isRunning`, `cyclesBeforeLongBreak`, `completedWorkCycles`); `TickBarView` (Task 2: `fraction:isInteractive:onDrag:`); `ControlsRow` (Task 4, unveränderte Signatur)
-- Produces: `MenuBarView(engine:)` — Signatur unverändert
-
-Dieser Task setzt Tasks 1, 2 und 4 zusammen — vorher schlägt der Gesamt-Build fehl (siehe Hinweis in Task 2, Step 2). Ab hier muss der volle Build wieder grün sein.
-
-- [ ] **Step 1: `Pomodo/Views/MenuBarView.swift` komplett ersetzen**
+- [ ] **Step 2: `Pomodo/Views/MenuBarView.swift` komplett ersetzen**
 
 ```swift
 // Pomodo/Views/MenuBarView.swift
@@ -605,36 +481,139 @@ Wichtige Details:
 - Das Stift-Icon erscheint ausschließlich, wenn `!engine.isRunning && engine.idlePreviewMinutes >= 60` (rechter Anschlag der Leiste) und der Editor nicht schon offen ist.
 - `commitCustomDuration()` ignoriert ungültige Eingaben (kein Int, oder ≤ 0) still — der Editor schließt trotzdem, ohne die bisherige `pendingCustomWorkMinutes` zu verändern. Werte werden zusätzlich auf maximal 999 Minuten gedeckelt.
 
+- [ ] **Step 3: Build verifizieren**
+
+Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild build -project Pomodo.xcodeproj -scheme Pomodo -destination 'platform=macOS'`
+Expected: `** BUILD SUCCEEDED **`
+
+- [ ] **Step 4: Vollständige Testsuite laufen lassen**
+
+Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild test -project Pomodo.xcodeproj -scheme Pomodo -destination 'platform=macOS'`
+Expected: `** TEST SUCCEEDED **`, alle Tests (inkl. der 9 neuen aus Task 1) grün.
+
+- [ ] **Step 5: `git status --short` prüfen**
+
+Erwartet: nur `Pomodo/Views/TickBarView.swift` und `Pomodo/Views/MenuBarView.swift` verändert, keine `project.pbxproj`-Änderung.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add Pomodo/Views/TickBarView.swift Pomodo/Views/MenuBarView.swift
+git commit -m "feat: add interactive tick bar with idle preview and manual duration entry"
+```
+
+---
+
+### Task 3: MenuBarLabelView — Icon entfernen, reine Text-Anzeige
+
+**Files:**
+- Modify: `Pomodo/Views/MenuBarLabelView.swift` (komplett ersetzen)
+
+**Interfaces:**
+- Consumes: `TimerEngine` (`isRunning`, `formattedRemaining`, `remainingSeconds`) — unverändert
+- Produces: `MenuBarLabelView(engine:)` — Signatur unverändert, nur der Inhalt ändert sich
+- Kein automatisierter Test (reine SwiftUI-Darstellung, manuell verifiziert).
+
+- [ ] **Step 1: `Pomodo/Views/MenuBarLabelView.swift` komplett ersetzen**
+
+```swift
+// Pomodo/Views/MenuBarLabelView.swift
+import SwiftUI
+
+struct MenuBarLabelView: View {
+    @ObservedObject var engine: TimerEngine
+
+    var body: some View {
+        if engine.isRunning {
+            Text(engine.formattedRemaining)
+                .font(.system(.body, design: .monospaced))
+                .contentTransition(.numericText(countsDown: true))
+                .animation(.default, value: engine.remainingSeconds)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 2)
+                .background(Capsule().fill(Color.black))
+                .foregroundStyle(Color.white)
+        } else {
+            Text("00:00")
+                .font(.system(.body, design: .monospaced))
+                .foregroundStyle(.secondary)
+        }
+    }
+}
+```
+
+Kein SF-Symbol-Icon mehr in beiden Zuständen (siehe Design-Spec Abschnitt 13.1). Idle zeigt immer literal `"00:00"`, unabhängig von einer evtl. im Panel gewählten Vorschau-Dauer.
+
 - [ ] **Step 2: Build verifizieren**
 
 Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild build -project Pomodo.xcodeproj -scheme Pomodo -destination 'platform=macOS'`
 Expected: `** BUILD SUCCEEDED **`
 
-- [ ] **Step 3: Vollständige Testsuite laufen lassen**
-
-Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild test -project Pomodo.xcodeproj -scheme Pomodo -destination 'platform=macOS'`
-Expected: `** TEST SUCCEEDED **`, alle Tests (inkl. der 9 neuen aus Task 1) grün.
-
-- [ ] **Step 4: `git status --short` prüfen**
-
-Erwartet: nur `Pomodo/Views/MenuBarView.swift` verändert, keine `project.pbxproj`-Änderung.
-
-- [ ] **Step 5: Commit**
+- [ ] **Step 3: Commit**
 
 ```bash
-git add Pomodo/Views/MenuBarView.swift
-git commit -m "feat: wire interactive tick bar, idle preview and manual duration entry into panel"
+git add Pomodo/Views/MenuBarLabelView.swift
+git commit -m "feat: remove icon from menu bar label, show plain countdown text"
 ```
 
 ---
 
-### Task 6: Manuelle End-to-End-Verifikation & Dokumentation
+### Task 4: ControlsRow — "..."-Menü durch reinen Chevron ersetzen
+
+**Files:**
+- Modify: `Pomodo/Views/ControlsRow.swift` (gezielte Änderung, siehe Step 1)
+
+**Interfaces:**
+- Consumes: `TimerEngine` — unverändert
+- Produces: `ControlsRow(engine:)` — Signatur unverändert
+- Kein automatisierter Test (reine SwiftUI-Darstellung, manuell verifiziert).
+
+- [ ] **Step 1: Menu-Label und Indicator anpassen**
+
+In `Pomodo/Views/ControlsRow.swift`, ersetze:
+
+```swift
+            } label: {
+                Text("...")
+            }
+            .menuStyle(.borderlessButton)
+            .fixedSize()
+```
+
+durch:
+
+```swift
+            } label: {
+                Image(systemName: "chevron.down")
+            }
+            .menuStyle(.borderlessButton)
+            .menuIndicator(.hidden)
+            .fixedSize()
+```
+
+Der Rest der Datei (Menü-Inhalt: Einstellungen/Skip/Beenden, die beiden anderen Buttons, `primaryButtonLabel`/`primaryButtonAction`) bleibt unverändert.
+
+- [ ] **Step 2: Build verifizieren**
+
+Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild build -project Pomodo.xcodeproj -scheme Pomodo -destination 'platform=macOS'`
+Expected: `** BUILD SUCCEEDED **`
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add Pomodo/Views/ControlsRow.swift
+git commit -m "fix: replace ellipsis-plus-chevron menu trigger with a single chevron"
+```
+
+---
+
+### Task 5: Manuelle End-to-End-Verifikation & Dokumentation
 
 **Files:**
 - Modify: `ROADMAP.md`
 
 **Interfaces:**
-- Consumes: die vollständige, zusammengesetzte App aus Tasks 1–5
+- Consumes: die vollständige, zusammengesetzte App aus Tasks 1–4
 - Produces: nichts Neues, nur Verifikation + Doku-Update
 
 - [ ] **Step 1: Build & volle Testsuite ein letztes Mal verifizieren**
@@ -675,7 +654,7 @@ git commit -m "docs: mark menu bar iteration 2 as done in roadmap"
 
 ## Self-Review-Notizen (bereits durchgeführt)
 
-- **Spec-Abdeckung:** Alle vier Punkte aus Design-Spec Abschnitt 13 sind auf Tasks gemappt (13.1 → Task 3, 13.2 → Task 4, 13.3 → Tasks 1/2/5).
+- **Spec-Abdeckung:** Alle vier Punkte aus Design-Spec Abschnitt 13 sind auf Tasks gemappt (13.1 → Task 3, 13.2 → Task 4, 13.3 → Tasks 1/2).
 - **Platzhalter-Scan:** Keine TBD/TODO, jeder Code-Block ist vollständig und kompilierbar.
-- **Typ-Konsistenz:** `idlePreviewMinutes`/`idlePreviewSeconds`/`idleFraction`/`formattedDisplay`/`setPendingCustomWorkMinutes` werden in Task 1 definiert und in Task 5 mit identischer Signatur verwendet; `TickBarView`s neue Signatur (`fraction:isInteractive:onDrag:`) wird in Task 2 definiert und in Task 5 exakt so aufgerufen.
-- **Bekannte, akzeptierte Einschränkung:** `.numericText(countsDown: true)` animiert beim Hoch-Ziehen im Idle-Zustand weiterhin in "Countdown"-Richtung — kosmetisch, dokumentiert in Task 5, kein Blocker.
+- **Typ-Konsistenz:** `idlePreviewMinutes`/`idlePreviewSeconds`/`idleFraction`/`formattedDisplay`/`setPendingCustomWorkMinutes` werden in Task 1 definiert und in Task 2 mit identischer Signatur verwendet; `TickBarView`s neue Signatur (`fraction:isInteractive:onDrag:`) wird innerhalb von Task 2 definiert und im selben Task/Commit aufgerufen — kein Zwischenzustand, der nicht baut.
+- **Bekannte, akzeptierte Einschränkung:** `.numericText(countsDown: true)` animiert beim Hoch-Ziehen im Idle-Zustand weiterhin in "Countdown"-Richtung — kosmetisch, dokumentiert in Task 2, kein Blocker.
