@@ -31,8 +31,7 @@ struct SettingsView: View {
         Binding(
             get: { settings.launchAtLogin },
             set: { newValue in
-                settings.launchAtLogin = newValue
-                LaunchAtLogin().setEnabled(newValue)
+                settings.launchAtLogin = LaunchAtLogin().setEnabled(newValue)
             }
         )
     }

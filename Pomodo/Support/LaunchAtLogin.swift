@@ -2,7 +2,8 @@
 import ServiceManagement
 
 struct LaunchAtLogin {
-    func setEnabled(_ enabled: Bool) {
+    @discardableResult
+    func setEnabled(_ enabled: Bool) -> Bool {
         do {
             if enabled {
                 if SMAppService.mainApp.status != .enabled {
@@ -16,6 +17,7 @@ struct LaunchAtLogin {
         } catch {
             print("LaunchAtLogin: Statusänderung fehlgeschlagen: \(error)")
         }
+        return isEnabled
     }
 
     var isEnabled: Bool {
