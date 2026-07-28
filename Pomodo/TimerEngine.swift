@@ -1,5 +1,6 @@
 // Pomodo/TimerEngine.swift
 import Foundation
+import Combine
 
 final class TimerEngine: ObservableObject {
     @Published private(set) var phase: TimerPhase = .work
@@ -17,6 +18,7 @@ final class TimerEngine: ObservableObject {
     private var endDate: Date?
     private var pausedRemainingSeconds: Int?
     private var ticker: Timer?
+    private var settingsCancellable: AnyCancellable?
 
     var cyclesBeforeLongBreak: Int { settings.cyclesBeforeLongBreak }
 
@@ -41,6 +43,9 @@ final class TimerEngine: ObservableObject {
         let initialTotal = settings.workMinutes * 60
         totalSeconds = initialTotal
         remainingSeconds = initialTotal
+        settingsCancellable = settings.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
     }
 
     deinit {
