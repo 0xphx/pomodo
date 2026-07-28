@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CAB7C10C880B267F673BA /* TimerPhase.swift */; };
 		19410674D77591C3F80D9618 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110D48950DEF388EEE73F32 /* SmokeTests.swift */; };
+		4607E4187C9F5CC1A06DECDA /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */; };
+		62EBE5B80E179F6B99F1FA9B /* SoundPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */; };
 		67BEA61B1A2448A4348633F8 /* TimerSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */; };
 		C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */; };
 		EE67BA6D2A13E8E1ACAF9F7A /* TimerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66E8F541F50805D0184F7A /* TimerSettings.swift */; };
@@ -30,19 +32,30 @@
 		47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsTests.swift; sourceTree = "<group>"; };
 		544CAB7C10C880B267F673BA /* TimerPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhase.swift; sourceTree = "<group>"; };
 		6E66E8F541F50805D0184F7A /* TimerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettings.swift; sourceTree = "<group>"; };
+		7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		81CB3E230F7DD650F3ED13CF /* Pomodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayerTests.swift; sourceTree = "<group>"; };
 		90F517FB724546B45DD0F1A8 /* Pomodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pomodo.entitlements; sourceTree = "<group>"; };
 		C6DC9D8489A264FA7BA71983 /* PomodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		2E39977B7BF0422E4C43F896 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		8A22B591A1FE7F2AB3367F29 /* Pomodo */ = {
 			isa = PBXGroup;
 			children = (
 				CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */,
 				9DC66269DCDC84D9FE71D8DB /* Models */,
 				FF073A43C66C980DE4C637D4 /* Resources */,
+				2E39977B7BF0422E4C43F896 /* Support */,
 			);
 			path = Pomodo;
 			sourceTree = "<group>";
@@ -51,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				0110D48950DEF388EEE73F32 /* SmokeTests.swift */,
+				8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */,
 				47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */,
 			);
 			path = PomodoTests;
@@ -167,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19410674D77591C3F80D9618 /* SmokeTests.swift in Sources */,
+				62EBE5B80E179F6B99F1FA9B /* SoundPlayerTests.swift in Sources */,
 				67BEA61B1A2448A4348633F8 /* TimerSettingsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */,
+				4607E4187C9F5CC1A06DECDA /* SoundPlayer.swift in Sources */,
 				17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */,
 				EE67BA6D2A13E8E1ACAF9F7A /* TimerSettings.swift in Sources */,
 			);
