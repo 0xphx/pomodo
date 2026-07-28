@@ -127,3 +127,35 @@ Separates, echtes Fenster (nicht das Dropdown-Panel), geöffnet über `@Environm
 - Keine Statistik-/Verlaufs-Ansicht vergangener Pomodoro-Sessions
 - Keine iCloud-Synchronisation der Einstellungen
 - Kein custom (nicht-SF-Symbol) App-Icon in dieser ersten Version — `timer`-SF-Symbol ist leicht austauschbar, sobald ein eigenes Icon gewünscht ist
+
+## 13. Iteration 2 (2026-07-28): Menüleisten-Vereinfachung & interaktive Tick-Leiste
+
+Nach dem ersten Release wurde die App getestet; diese Iteration ändert vier Dinge. Sie **supersediert** die betroffenen Stellen in Abschnitt 5 und 6, der Rest der Spec bleibt gültig.
+
+### 13.1 Menüleisten-Anzeige (supersediert Abschnitt 5)
+
+Kein SF-Symbol-Icon mehr, in keinem Zustand:
+
+- **Idle:** nur Text `"00:00"`, ausgegraut (`.foregroundStyle(.secondary)`), kein Pill-Hintergrund. Zeigt immer literal "00:00" — unabhängig von einer evtl. im Panel eingestellten Vorschau-Dauer (siehe 13.3).
+- **Läuft/pausiert:** nur der Countdown-Text, in der dunklen Pille (wie bisher), aber ohne Icon daneben.
+
+### 13.2 "..."-Menü-Button (supersediert den entsprechenden Teil von Abschnitt 6, Punkt 2)
+
+Der bisherige `Text("...")`-Label erzeugt zusammen mit SwiftUIs automatischem Menü-Chevron eine unschöne Doppel-Optik. Neu: Label ist ein expliziter `Image(systemName: "chevron.down")`, zusätzlich `.menuIndicator(.hidden)` gesetzt, damit kein zweiter (automatischer) Chevron dazukommt. Menü-Inhalt (Einstellungen, Skip, Beenden) bleibt unverändert.
+
+### 13.3 Interaktive Tick-Leiste zum Einstellen einer eigenen Dauer (erweitert Abschnitt 6, Punkt 1)
+
+Nur im Idle-Zustand (`!engine.isRunning`) aktiv:
+
+- Die gesamte Tick-Leisten-Fläche ist per Drag-Geste bedienbar (nicht nur der dünne Marker) — Tippen/Ziehen an beliebiger Stelle springt dorthin, klassisches Slider-Verhalten.
+- Wertebereich 1–60 Minuten, rastet auf ganze Minuten (60 Ticks ↔ 60 mögliche Minutenwerte, 1:1-Entsprechung: Tick-Index *i* → *i+1* Minuten).
+- Gilt **nur einmalig** für die nächste Arbeitsphase, wird nicht in `TimerSettings`/UserDefaults persistiert. Nach `cancel()` oder App-Neustart gilt wieder die konfigurierte Standard-Arbeitsdauer.
+- Die große Countdown-Zahl im Panel zeigt im Idle-Zustand live die aktuell gewählte Vorschau-Dauer (Standarddauer aus den Einstellungen, oder die per Drag gewählte) — reagiert damit auch sofort auf Einstellungsänderungen, ohne dass vorher gestartet werden muss.
+- Bei Erreichen des rechten Anschlags (60 Min) erscheint ein kleines Stift-Icon neben der Countdown-Zahl. Antippen macht die Zahl zum Inline-Textfeld; Eingabe einer beliebigen Minutenzahl (z. B. "90") + Enter übernimmt diesen Wert als einmalige Sonderdauer (nicht auf 60 begrenzt).
+
+**TimerEngine-Erweiterung:**
+- Neue Property `pendingCustomWorkMinutes: Int?`
+- Gesetzt durch Drag/Texteingabe (nur sinnvoll im Idle-Zustand)
+- Gelöscht bei `cancel()`
+- Konsumiert (einmalig verwendet, danach auf `nil` zurückgesetzt) beim `start()` der nächsten Arbeitsphase — nachfolgende automatische Arbeitsphasen (nach Pausen) nutzen wieder `settings.workMinutes`
+- Neue berechnete Property für die Idle-Vorschau (Sekunden), z. B. `idlePreviewSeconds: Int { (pendingCustomWorkMinutes ?? settings.workMinutes) * 60 }`, genutzt von `MenuBarView`s großer Countdown-Anzeige und von `TickBarView`s Fraction-Berechnung im Idle-Zustand (`min(idlePreviewSeconds / 3600.0, 1.0)`) — **nicht** von der Menüleisten-Anzeige (die bleibt fix bei "00:00", siehe 13.1).
