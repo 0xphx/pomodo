@@ -1,10 +1,12 @@
 // Pomodo/PomodoApp.swift
 import SwiftUI
+import UserNotifications
 
 @main
 struct PomodoApp: App {
     @StateObject private var settings: TimerSettings
     @StateObject private var engine: TimerEngine
+    private let notificationPresenter = NotificationPresenter()
 
     init() {
         let settings = TimerSettings()
@@ -20,6 +22,7 @@ struct PomodoApp: App {
         _settings = StateObject(wrappedValue: settings)
         _engine = StateObject(wrappedValue: engine)
 
+        UNUserNotificationCenter.current().delegate = notificationPresenter
         notificationManager.requestAuthorization()
     }
 
