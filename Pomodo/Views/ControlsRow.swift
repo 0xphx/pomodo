@@ -20,9 +20,10 @@ struct ControlsRow: View {
                 Button("Skip") { engine.skip() }
                 Button("Beenden") { NSApplication.shared.terminate(nil) }
             } label: {
-                Text("...")
+                Image(systemName: "chevron.down")
             }
             .menuStyle(.borderlessButton)
+            .menuIndicator(.hidden)
             .fixedSize()
         }
         .buttonStyle(.plain)

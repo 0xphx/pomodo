@@ -3,24 +3,36 @@ import SwiftUI
 
 struct MenuBarView: View {
     @ObservedObject var engine: TimerEngine
+    @State private var isEditingCustomDuration = false
+    @State private var customDurationText = ""
+    @FocusState private var isDurationFieldFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            TickBarView(elapsedFraction: engine.elapsedFraction)
+            TickBarView(
+                fraction: engine.isRunning ? engine.elapsedFraction : engine.idleFraction,
+                isInteractive: !engine.isRunning && !isEditingCustomDuration,
+                onDrag: { fraction in
+                    let minutes = min(max(Int((fraction * 60).rounded()), 1), 60)
+                    engine.setPendingCustomWorkMinutes(minutes)
+                }
+            )
             ControlsRow(engine: engine)
             HStack {
                 cycleIndicator
                 Spacer()
-                Text(engine.formattedRemaining)
-                    .font(.system(size: 40, weight: .semibold, design: .rounded))
-                    .contentTransition(.numericText(countsDown: true))
-                    .animation(.default, value: engine.remainingSeconds)
+                countdownArea
             }
         }
         .padding(20)
         .frame(width: 320)
         .background(.ultraThinMaterial)
         .foregroundStyle(Color.primary)
+        .onChange(of: engine.isRunning) { _, isRunning in
+            if isRunning {
+                isEditingCustomDuration = false
+            }
+        }
     }
 
     private var cycleIndicator: some View {
@@ -31,5 +43,53 @@ struct MenuBarView: View {
                     .frame(width: 6, height: 6)
             }
         }
+    }
+
+    @ViewBuilder
+    private var countdownArea: some View {
+        HStack(spacing: 8) {
+            if showsCustomDurationEditor && !isEditingCustomDuration {
+                Button {
+                    customDurationText = String(engine.idlePreviewMinutes)
+                    isEditingCustomDuration = true
+                    isDurationFieldFocused = true
+                } label: {
+                    Image(systemName: "pencil")
+                }
+                .buttonStyle(.plain)
+            }
+
+            if isEditingCustomDuration {
+                TextField("Minuten", text: $customDurationText)
+                    .textFieldStyle(.plain)
+                    .font(.system(size: 40, weight: .semibold, design: .rounded))
+                    .frame(width: 90)
+                    .multilineTextAlignment(.trailing)
+                    .focused($isDurationFieldFocused)
+                    .onSubmit(commitCustomDuration)
+                    .onExitCommand { isEditingCustomDuration = false }
+                    .onChange(of: isDurationFieldFocused) { _, isFocused in
+                        if !isFocused && isEditingCustomDuration {
+                            commitCustomDuration()
+                        }
+                    }
+            } else {
+                Text(engine.formattedDisplay)
+                    .font(.system(size: 40, weight: .semibold, design: .rounded))
+                    .contentTransition(.numericText(countsDown: true))
+                    .animation(.default, value: engine.formattedDisplay)
+            }
+        }
+    }
+
+    private var showsCustomDurationEditor: Bool {
+        !engine.isRunning && (engine.pendingCustomWorkMinutes ?? 0) >= 60
+    }
+
+    private func commitCustomDuration() {
+        if let minutes = Int(customDurationText), minutes > 0 {
+            engine.setPendingCustomWorkMinutes(min(minutes, 999))
+        }
+        isEditingCustomDuration = false
     }
 }

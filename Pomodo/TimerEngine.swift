@@ -1,5 +1,6 @@
 // Pomodo/TimerEngine.swift
 import Foundation
+import Combine
 
 final class TimerEngine: ObservableObject {
     @Published private(set) var phase: TimerPhase = .work
@@ -8,6 +9,7 @@ final class TimerEngine: ObservableObject {
     @Published private(set) var isRunning: Bool = false
     @Published private(set) var isPaused: Bool = false
     @Published private(set) var completedWorkCycles: Int = 0
+    @Published private(set) var pendingCustomWorkMinutes: Int?
 
     var onPhaseCompleted: ((TimerPhase, TimerPhase) -> Void)?
 
@@ -16,18 +18,23 @@ final class TimerEngine: ObservableObject {
     private var endDate: Date?
     private var pausedRemainingSeconds: Int?
     private var ticker: Timer?
+    private var settingsCancellable: AnyCancellable?
 
     var cyclesBeforeLongBreak: Int { settings.cyclesBeforeLongBreak }
+
+    var idlePreviewMinutes: Int { pendingCustomWorkMinutes ?? settings.workMinutes }
+    var idlePreviewSeconds: Int { idlePreviewMinutes * 60 }
+    var idleFraction: Double { min(Double(idlePreviewMinutes) / 60.0, 1.0) }
 
     var elapsedFraction: Double {
         guard totalSeconds > 0 else { return 0 }
         return 1 - (Double(remainingSeconds) / Double(totalSeconds))
     }
 
-    var formattedRemaining: String {
-        let minutes = remainingSeconds / 60
-        let seconds = remainingSeconds % 60
-        return String(format: "%02d:%02d", minutes, seconds)
+    var formattedRemaining: String { Self.format(seconds: remainingSeconds) }
+
+    var formattedDisplay: String {
+        Self.format(seconds: isRunning ? remainingSeconds : idlePreviewSeconds)
     }
 
     init(settings: TimerSettings, now: @escaping () -> Date = Date.init) {
@@ -36,6 +43,9 @@ final class TimerEngine: ObservableObject {
         let initialTotal = settings.workMinutes * 60
         totalSeconds = initialTotal
         remainingSeconds = initialTotal
+        settingsCancellable = settings.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
     }
 
     deinit {
@@ -75,6 +85,7 @@ final class TimerEngine: ObservableObject {
         pausedRemainingSeconds = nil
         phase = .work
         completedWorkCycles = 0
+        pendingCustomWorkMinutes = nil
         totalSeconds = duration(for: phase)
         remainingSeconds = totalSeconds
     }
@@ -95,10 +106,22 @@ final class TimerEngine: ObservableObject {
         }
     }
 
+    func setPendingCustomWorkMinutes(_ minutes: Int) {
+        guard !isRunning else { return }
+        pendingCustomWorkMinutes = max(1, minutes)
+    }
+
     private func beginPhase(_ phase: TimerPhase) {
-        totalSeconds = duration(for: phase)
-        remainingSeconds = totalSeconds
-        endDate = now().addingTimeInterval(TimeInterval(remainingSeconds))
+        let seconds: Int
+        if phase == .work, let custom = pendingCustomWorkMinutes {
+            seconds = custom * 60
+            pendingCustomWorkMinutes = nil
+        } else {
+            seconds = duration(for: phase)
+        }
+        totalSeconds = seconds
+        remainingSeconds = seconds
+        endDate = now().addingTimeInterval(TimeInterval(seconds))
         isRunning = true
         isPaused = false
         pausedRemainingSeconds = nil
@@ -128,6 +151,12 @@ final class TimerEngine: ObservableObject {
         case .shortBreak: return settings.shortBreakMinutes * 60
         case .longBreak: return settings.longBreakMinutes * 60
         }
+    }
+
+    private static func format(seconds: Int) -> String {
+        let minutes = seconds / 60
+        let secs = seconds % 60
+        return String(format: "%02d:%02d", minutes, secs)
     }
 
     private func startTicker() {
