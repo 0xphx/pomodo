@@ -2,7 +2,9 @@
 import SwiftUI
 
 struct TickBarView: View {
-    let elapsedFraction: Double
+    let fraction: Double
+    var isInteractive: Bool = false
+    var onDrag: ((Double) -> Void)? = nil
     private let tickCount = 60
     private let markerWidth: CGFloat = 2
 
@@ -22,9 +24,18 @@ struct TickBarView: View {
                 Rectangle()
                     .fill(Color.red)
                     .frame(width: markerWidth)
-                    .offset(x: min(CGFloat(elapsedFraction) * geometry.size.width, geometry.size.width - markerWidth))
-                    .animation(.linear(duration: 1), value: elapsedFraction)
+                    .offset(x: min(CGFloat(fraction) * geometry.size.width, geometry.size.width - markerWidth))
+                    .animation(isInteractive ? nil : .linear(duration: 1), value: fraction)
             }
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        let clamped = min(max(value.location.x / geometry.size.width, 0), 1)
+                        onDrag?(clamped)
+                    },
+                isEnabled: isInteractive
+            )
         }
         .frame(height: 24)
     }
