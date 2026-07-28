@@ -1,6 +1,13 @@
 # Roadmap
 
 ## Geplant
+- [ ] Polish-Nachlese aus dem finalen Code-Review (nicht blockierend, aber offen):
+  - Idle-Countdown aktualisiert sich nicht sofort bei Einstellungsänderung
+  - `restart()`/`skip()` haben keine konsistenten Idle-Guards
+  - `MenuBarLabelView`-Pill bleibt im Dark Mode hartcodiert schwarz (schlecht sichtbar auf dunkler Menüleiste)
+  - Keine Bounds-Validierung für aus UserDefaults gelesene Settings-Werte
+  - `PomodoTests`-Target nutzt Swift 5 statt Swift 6 (Konsistenz mit App-Target)
+  - Countdown zeigt nie exakt "00:00" (springt direkt zur nächsten Phase)
 
 ## In Arbeit
 
