@@ -148,7 +148,7 @@ Der bisherige `Text("...")`-Label erzeugt zusammen mit SwiftUIs automatischem Me
 Nur im Idle-Zustand (`!engine.isRunning`) aktiv:
 
 - Die gesamte Tick-Leisten-Fläche ist per Drag-Geste bedienbar (nicht nur der dünne Marker) — Tippen/Ziehen an beliebiger Stelle springt dorthin, klassisches Slider-Verhalten.
-- Wertebereich 1–60 Minuten, rastet auf ganze Minuten (60 Ticks ↔ 60 mögliche Minutenwerte, 1:1-Entsprechung: Tick-Index *i* → *i+1* Minuten).
+- Wertebereich 1–60 Minuten, rastet auf ganze Minuten (60 Ticks ↔ 60 mögliche Minutenwerte). Umsetzung: `minutes = round(fraction * 60)`, geclampt auf 1...60 — Tick-Index *i* entspricht *i* Minuten (0-basiert), nicht *i+1* wie ursprünglich hier notiert; Drag-Berechnung und Marker-Darstellung nutzen dieselbe Formel und sind dadurch konsistent.
 - Gilt **nur einmalig** für die nächste Arbeitsphase, wird nicht in `TimerSettings`/UserDefaults persistiert. Nach `cancel()` oder App-Neustart gilt wieder die konfigurierte Standard-Arbeitsdauer.
 - Die große Countdown-Zahl im Panel zeigt im Idle-Zustand live die aktuell gewählte Vorschau-Dauer (Standarddauer aus den Einstellungen, oder die per Drag gewählte) — reagiert damit auch sofort auf Einstellungsänderungen, ohne dass vorher gestartet werden muss.
 - Bei Erreichen des rechten Anschlags (60 Min) erscheint ein kleines Stift-Icon neben der Countdown-Zahl. Antippen macht die Zahl zum Inline-Textfeld; Eingabe einer beliebigen Minutenzahl (z. B. "90") + Enter übernimmt diesen Wert als einmalige Sonderdauer (nicht auf 60 begrenzt).
