@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CAB7C10C880B267F673BA /* TimerPhase.swift */; };
 		19410674D77591C3F80D9618 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110D48950DEF388EEE73F32 /* SmokeTests.swift */; };
+		67BEA61B1A2448A4348633F8 /* TimerSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */; };
 		C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */; };
+		EE67BA6D2A13E8E1ACAF9F7A /* TimerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66E8F541F50805D0184F7A /* TimerSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +27,9 @@
 /* Begin PBXFileReference section */
 		0110D48950DEF388EEE73F32 /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
 		0133FB525CEE161C8EF5FA0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsTests.swift; sourceTree = "<group>"; };
+		544CAB7C10C880B267F673BA /* TimerPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhase.swift; sourceTree = "<group>"; };
+		6E66E8F541F50805D0184F7A /* TimerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettings.swift; sourceTree = "<group>"; };
 		81CB3E230F7DD650F3ED13CF /* Pomodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F517FB724546B45DD0F1A8 /* Pomodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pomodo.entitlements; sourceTree = "<group>"; };
 		C6DC9D8489A264FA7BA71983 /* PomodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,6 +41,7 @@
 			isa = PBXGroup;
 			children = (
 				CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */,
+				9DC66269DCDC84D9FE71D8DB /* Models */,
 				FF073A43C66C980DE4C637D4 /* Resources */,
 			);
 			path = Pomodo;
@@ -44,8 +51,18 @@
 			isa = PBXGroup;
 			children = (
 				0110D48950DEF388EEE73F32 /* SmokeTests.swift */,
+				47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */,
 			);
 			path = PomodoTests;
+			sourceTree = "<group>";
+		};
+		9DC66269DCDC84D9FE71D8DB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				544CAB7C10C880B267F673BA /* TimerPhase.swift */,
+				6E66E8F541F50805D0184F7A /* TimerSettings.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BA9226CDCF22127D2B38249A /* Products */ = {
@@ -150,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19410674D77591C3F80D9618 /* SmokeTests.swift in Sources */,
+				67BEA61B1A2448A4348633F8 /* TimerSettingsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +176,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */,
+				17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */,
+				EE67BA6D2A13E8E1ACAF9F7A /* TimerSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
