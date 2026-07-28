@@ -130,6 +130,7 @@ final class SmokeTests: XCTestCase {
 DerivedData/
 xcuserdata/
 .build/
+.superpowers/
 ```
 
 - [ ] **Step 5: `ROADMAP.md` anlegen**
