@@ -3,6 +3,6 @@
 ## Geplant
 
 ## In Arbeit
-- [ ] Pomodoro-Menüleisten-App (Grundgerüst, TimerEngine, UI, Settings, Sound/Notifications)
 
 ## Erledigt
+- [x] Pomodoro-Menüleisten-App (Grundgerüst, TimerEngine, UI, Settings, Sound/Notifications) (2026-07-28)
