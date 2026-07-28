@@ -12,11 +12,16 @@ struct NotificationManager {
     }
 
     func notifyPhaseCompleted(finished: TimerPhase, next: TimerPhase) {
+        let content = self.content(finished: finished, next: next)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        center.add(request, withCompletionHandler: nil)
+    }
+
+    func content(finished: TimerPhase, next: TimerPhase) -> UNNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = title(for: finished)
         content.body = body(for: next)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-        center.add(request, withCompletionHandler: nil)
+        return content
     }
 
     func title(for phase: TimerPhase) -> String {

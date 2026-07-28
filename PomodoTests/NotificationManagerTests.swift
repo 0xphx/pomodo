@@ -16,4 +16,23 @@ final class NotificationManagerTests: XCTestCase {
         XCTAssertEqual(manager.body(for: .shortBreak), "Zeit für eine kurze Pause.")
         XCTAssertEqual(manager.body(for: .longBreak), "Zeit für eine lange Pause.")
     }
+
+    func testNotifyPhaseCompletedBuildsCorrectContent() {
+        let manager = NotificationManager()
+
+        // Test: work phase finished, short break next
+        var content = manager.content(finished: .work, next: .shortBreak)
+        XCTAssertEqual(content.title, "Arbeitsphase beendet")
+        XCTAssertEqual(content.body, "Zeit für eine kurze Pause.")
+
+        // Test: short break finished, work phase next
+        content = manager.content(finished: .shortBreak, next: .work)
+        XCTAssertEqual(content.title, "Pause beendet")
+        XCTAssertEqual(content.body, "Zeit für die nächste Arbeitsphase.")
+
+        // Test: long break finished, work phase next
+        content = manager.content(finished: .longBreak, next: .work)
+        XCTAssertEqual(content.title, "Lange Pause beendet")
+        XCTAssertEqual(content.body, "Zeit für die nächste Arbeitsphase.")
+    }
 }
