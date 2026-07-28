@@ -130,6 +130,7 @@ final class SmokeTests: XCTestCase {
 DerivedData/
 xcuserdata/
 .build/
+.superpowers/
 ```
 
 - [ ] **Step 5: `ROADMAP.md` anlegen**
@@ -328,7 +329,7 @@ git commit -m "feat: add TimerPhase and TimerSettings models"
 
 **Interfaces:**
 - Consumes: `SoundPreset` (aus Task 2, `Pomodo/Models/TimerSettings.swift`)
-- Produces: `struct SoundPlayer { func play(_ preset: SoundPreset) }`
+- Produces: `struct SoundPlayer { @discardableResult func play(_ preset: SoundPreset) -> Bool }`
 
 - [ ] **Step 1: Failing Test schreiben**
 
@@ -345,10 +346,10 @@ final class SoundPlayerTests: XCTestCase {
         }
     }
 
-    func testPlayDoesNotCrashForEveryPreset() {
+    func testPlaySucceedsForEveryPreset() {
         let player = SoundPlayer()
         for preset in SoundPreset.allCases {
-            player.play(preset)
+            XCTAssertTrue(player.play(preset), "Abspielen ist für Preset \(preset.rawValue) fehlgeschlagen")
         }
     }
 }
@@ -366,9 +367,10 @@ Expected: FAIL — `SoundPlayer` existiert noch nicht.
 import AppKit
 
 struct SoundPlayer {
-    func play(_ preset: SoundPreset) {
+    @discardableResult
+    func play(_ preset: SoundPreset) -> Bool {
         let sound = NSSound(named: preset.rawValue) ?? NSSound(named: SoundPreset.glass.rawValue)
-        sound?.play()
+        return sound?.play() ?? false
     }
 }
 ```

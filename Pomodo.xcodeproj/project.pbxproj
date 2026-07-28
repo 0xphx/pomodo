@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1470DE7ADCC4D663C670BE42 /* MenuBarLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A10E9F89CAE46B11475CA /* MenuBarLabelView.swift */; };
+		17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CAB7C10C880B267F673BA /* TimerPhase.swift */; };
+		19410674D77591C3F80D9618 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110D48950DEF388EEE73F32 /* SmokeTests.swift */; };
+		1B0920F9C2DDA02B1BF278DB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75F826116D0A5FAB75312C1 /* SettingsView.swift */; };
+		3798EAE71D9EE5ABD792BB70 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000DA75976F6B2A8E5DCC4BC /* MenuBarView.swift */; };
+		4607E4187C9F5CC1A06DECDA /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */; };
+		524BDDA1B4733849A7BE3202 /* TimerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC562A67E770C607BFD0E051 /* TimerEngine.swift */; };
+		61A34B9191FEC899F65AA8CD /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307B54C15ECD72D5E2B3CEE /* TimerEngineTests.swift */; };
+		62EBE5B80E179F6B99F1FA9B /* SoundPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */; };
+		63FE45DD438139CB8C6CBFF4 /* ControlsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B19AE72BAFCAC83B1AB6ADC /* ControlsRow.swift */; };
+		67BEA61B1A2448A4348633F8 /* TimerSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */; };
+		691AAF29BD1CCDCCA2E90958 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E97049606B0701E68C37E /* LaunchAtLogin.swift */; };
+		7F2E7AA8DD7669E1AAF43672 /* TickBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761F1914F3745888C851C82 /* TickBarView.swift */; };
+		ACC579527ACE857FC6A63FBC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C925EFA20C7A987B390A /* NotificationManager.swift */; };
+		C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */; };
+		E2F3A8EF8EE96AD32AF1333E /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E437821E213AEF2FE5CC23A8 /* NotificationManagerTests.swift */; };
+		EE67BA6D2A13E8E1ACAF9F7A /* TimerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66E8F541F50805D0184F7A /* TimerSettings.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F871235F545524B3A992CD95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF9D42C77FEC7D041426597B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6DBB26C2838B36B8B613119;
+			remoteInfo = Pomodo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		000DA75976F6B2A8E5DCC4BC /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		0110D48950DEF388EEE73F32 /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
+		0133FB525CEE161C8EF5FA0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1307B54C15ECD72D5E2B3CEE /* TimerEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineTests.swift; sourceTree = "<group>"; };
+		3B19AE72BAFCAC83B1AB6ADC /* ControlsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsRow.swift; sourceTree = "<group>"; };
+		47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsTests.swift; sourceTree = "<group>"; };
+		544CAB7C10C880B267F673BA /* TimerPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhase.swift; sourceTree = "<group>"; };
+		6E66E8F541F50805D0184F7A /* TimerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettings.swift; sourceTree = "<group>"; };
+		7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		810A10E9F89CAE46B11475CA /* MenuBarLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabelView.swift; sourceTree = "<group>"; };
+		81CB3E230F7DD650F3ED13CF /* Pomodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86D8C925EFA20C7A987B390A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayerTests.swift; sourceTree = "<group>"; };
+		90F517FB724546B45DD0F1A8 /* Pomodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pomodo.entitlements; sourceTree = "<group>"; };
+		BC562A67E770C607BFD0E051 /* TimerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngine.swift; sourceTree = "<group>"; };
+		C6DC9D8489A264FA7BA71983 /* PomodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C75F826116D0A5FAB75312C1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoApp.swift; sourceTree = "<group>"; };
+		D94E97049606B0701E68C37E /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
+		E437821E213AEF2FE5CC23A8 /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
+		F761F1914F3745888C851C82 /* TickBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickBarView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2E39977B7BF0422E4C43F896 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				D94E97049606B0701E68C37E /* LaunchAtLogin.swift */,
+				86D8C925EFA20C7A987B390A /* NotificationManager.swift */,
+				7A71F0F99A3E002C299EFF34 /* SoundPlayer.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		3F7F36C9118CFF7518B9B289 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B19AE72BAFCAC83B1AB6ADC /* ControlsRow.swift */,
+				810A10E9F89CAE46B11475CA /* MenuBarLabelView.swift */,
+				000DA75976F6B2A8E5DCC4BC /* MenuBarView.swift */,
+				C75F826116D0A5FAB75312C1 /* SettingsView.swift */,
+				F761F1914F3745888C851C82 /* TickBarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8A22B591A1FE7F2AB3367F29 /* Pomodo */ = {
+			isa = PBXGroup;
+			children = (
+				CE7D0B5C1EA6F912515D05BE /* PomodoApp.swift */,
+				BC562A67E770C607BFD0E051 /* TimerEngine.swift */,
+				9DC66269DCDC84D9FE71D8DB /* Models */,
+				FF073A43C66C980DE4C637D4 /* Resources */,
+				2E39977B7BF0422E4C43F896 /* Support */,
+				3F7F36C9118CFF7518B9B289 /* Views */,
+			);
+			path = Pomodo;
+			sourceTree = "<group>";
+		};
+		8C0CBBE21B7D2175ECE90B2C /* PomodoTests */ = {
+			isa = PBXGroup;
+			children = (
+				E437821E213AEF2FE5CC23A8 /* NotificationManagerTests.swift */,
+				0110D48950DEF388EEE73F32 /* SmokeTests.swift */,
+				8FEEE943E392C3E2762A7FEB /* SoundPlayerTests.swift */,
+				1307B54C15ECD72D5E2B3CEE /* TimerEngineTests.swift */,
+				47373B4E2305551277C7BE32 /* TimerSettingsTests.swift */,
+			);
+			path = PomodoTests;
+			sourceTree = "<group>";
+		};
+		9DC66269DCDC84D9FE71D8DB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				544CAB7C10C880B267F673BA /* TimerPhase.swift */,
+				6E66E8F541F50805D0184F7A /* TimerSettings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BA9226CDCF22127D2B38249A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81CB3E230F7DD650F3ED13CF /* Pomodo.app */,
+				C6DC9D8489A264FA7BA71983 /* PomodoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2F63B9732697A9ED459A622 = {
+			isa = PBXGroup;
+			children = (
+				8A22B591A1FE7F2AB3367F29 /* Pomodo */,
+				8C0CBBE21B7D2175ECE90B2C /* PomodoTests */,
+				BA9226CDCF22127D2B38249A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FF073A43C66C980DE4C637D4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0133FB525CEE161C8EF5FA0A /* Info.plist */,
+				90F517FB724546B45DD0F1A8 /* Pomodo.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0CA7B98ABB1C0AAD4A041CA4 /* PomodoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8AB77F25CB3D81BC1D0A6C03 /* Build configuration list for PBXNativeTarget "PomodoTests" */;
+			buildPhases = (
+				2599B13618777F2C8C28BD35 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				293327E372BB31C2157013BB /* PBXTargetDependency */,
+			);
+			name = PomodoTests;
+			packageProductDependencies = (
+			);
+			productName = PomodoTests;
+			productReference = C6DC9D8489A264FA7BA71983 /* PomodoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A6DBB26C2838B36B8B613119 /* Pomodo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97BA3A1714AA3B95AB85780F /* Build configuration list for PBXNativeTarget "Pomodo" */;
+			buildPhases = (
+				48787CB9E80C99A798511150 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pomodo;
+			packageProductDependencies = (
+			);
+			productName = Pomodo;
+			productReference = 81CB3E230F7DD650F3ED13CF /* Pomodo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF9D42C77FEC7D041426597B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 514481A532C96B80B99539A0 /* Build configuration list for PBXProject "Pomodo" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D2F63B9732697A9ED459A622;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BA9226CDCF22127D2B38249A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A6DBB26C2838B36B8B613119 /* Pomodo */,
+				0CA7B98ABB1C0AAD4A041CA4 /* PomodoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2599B13618777F2C8C28BD35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F3A8EF8EE96AD32AF1333E /* NotificationManagerTests.swift in Sources */,
+				19410674D77591C3F80D9618 /* SmokeTests.swift in Sources */,
+				62EBE5B80E179F6B99F1FA9B /* SoundPlayerTests.swift in Sources */,
+				61A34B9191FEC899F65AA8CD /* TimerEngineTests.swift in Sources */,
+				67BEA61B1A2448A4348633F8 /* TimerSettingsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48787CB9E80C99A798511150 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63FE45DD438139CB8C6CBFF4 /* ControlsRow.swift in Sources */,
+				691AAF29BD1CCDCCA2E90958 /* LaunchAtLogin.swift in Sources */,
+				1470DE7ADCC4D663C670BE42 /* MenuBarLabelView.swift in Sources */,
+				3798EAE71D9EE5ABD792BB70 /* MenuBarView.swift in Sources */,
+				ACC579527ACE857FC6A63FBC /* NotificationManager.swift in Sources */,
+				C946783296C35D9F6DFED3D0 /* PomodoApp.swift in Sources */,
+				1B0920F9C2DDA02B1BF278DB /* SettingsView.swift in Sources */,
+				4607E4187C9F5CC1A06DECDA /* SoundPlayer.swift in Sources */,
+				7F2E7AA8DD7669E1AAF43672 /* TickBarView.swift in Sources */,
+				524BDDA1B4733849A7BE3202 /* TimerEngine.swift in Sources */,
+				17E801FB8F6F074733B40A97 /* TimerPhase.swift in Sources */,
+				EE67BA6D2A13E8E1ACAF9F7A /* TimerSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		293327E372BB31C2157013BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6DBB26C2838B36B8B613119 /* Pomodo */;
+			targetProxy = F871235F545524B3A992CD95 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2484343840BC6025100F546E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Pomodo/Resources/Pomodo.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Pomodo/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phoenix.pomodo;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		58B5186EE356388476F26DCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Pomodo/Resources/Pomodo.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Pomodo/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phoenix.pomodo;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		83D8FCB257E96F377031D553 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phoenix.pomodo.PomodoTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pomodo.app/Contents/MacOS/Pomodo";
+			};
+			name = Release;
+		};
+		A78425BC24BC34C61728AF16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BB03C17F115AEB5BA20680C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E3BE5590AA59FDD04B379BB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phoenix.pomodo.PomodoTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pomodo.app/Contents/MacOS/Pomodo";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		514481A532C96B80B99539A0 /* Build configuration list for PBXProject "Pomodo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A78425BC24BC34C61728AF16 /* Debug */,
+				BB03C17F115AEB5BA20680C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8AB77F25CB3D81BC1D0A6C03 /* Build configuration list for PBXNativeTarget "PomodoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3BE5590AA59FDD04B379BB8 /* Debug */,
+				83D8FCB257E96F377031D553 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		97BA3A1714AA3B95AB85780F /* Build configuration list for PBXNativeTarget "Pomodo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2484343840BC6025100F546E /* Debug */,
+				58B5186EE356388476F26DCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF9D42C77FEC7D041426597B /* Project object */;
+}
