@@ -1,0 +1,51 @@
+name: Pomodo
+options:
+  bundleIdPrefix: com.phoenix.pomodo
+  deploymentTarget:
+    macOS: "14.0"
+targets:
+  Pomodo:
+    type: application
+    platform: macOS
+    sources:
+      - path: Pomodo
+    info:
+      path: Pomodo/Resources/Info.plist
+      properties:
+        LSUIElement: true
+        CFBundleDisplayName: Pomodo
+        NSHumanReadableCopyright: ""
+    entitlements:
+      path: Pomodo/Resources/Pomodo.entitlements
+      properties:
+        com.apple.security.app-sandbox: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.phoenix.pomodo
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "6.0"
+        ENABLE_HARDENED_RUNTIME: true
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+  PomodoTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: PomodoTests
+    dependencies:
+      - target: Pomodo
+    settings:
+      base:
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        GENERATE_INFOPLIST_FILE: true
+schemes:
+  Pomodo:
+    build:
+      targets:
+        Pomodo: all
+        PomodoTests: [test]
+    test:
+      targets:
+        - PomodoTests
+    run:
+      config: Debug
